@@ -1,18 +1,22 @@
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { GetServerSideProps } from 'next';
 import axios from 'axios';
-export const Home = (): JSX.Element => {
-  const [ip, setIP] = useState<string>('');
-  const fetchIP = async () => {
-    const { data: res } = await axios.get('/api/hello');
-    const { ip, success }: { ip: string; success: number } = res;
-    if (success !== -1) setIP(ip);
-    console.log('👨🏻‍💻%c|lty test|', 'background-color:#009688;color:#fff;font-weight:700', 'res', ip);
-  };
+import React, { useEffect } from 'react';
+import { IncomingMessage } from 'http';
+interface HomeProps {
+  ip: string;
+  extraInfo: string;
+}
+export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
 
   useEffect(() => {
-    fetchIP();
-  }, []);
+    console.log(
+      '👨🏻‍💻%c|lty test|',
+      'background-color:#009688;color:#fff;font-weight:700',
+      'extra',
+      extraInfo,
+    );
+  });
   return (
     <div className="container">
       <Head>
@@ -203,8 +207,7 @@ export const Home = (): JSX.Element => {
         body {
           padding: 0;
           margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
-            Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, Roboto, Helvetica, sans-serif;
         }
 
         * {
@@ -216,3 +219,20 @@ export const Home = (): JSX.Element => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { req }: { req: IncomingMessage } = context;
+  const ip = req.headers['x-forwarded-for'];
+
+  if (!ip) return { props: {} };
+
+  const res = await axios.get(`https://ipinfo.io/${ip}/json`);
+  const extra = res.data || {};
+
+  return {
+    props: {
+      ip: req.headers['x-forwarded-for'],
+      extraInfo: extra,
+    },
+  };
+};
