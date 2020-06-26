@@ -22,6 +22,7 @@ export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="network utilities for developers"/>
       </Head>
 
       <main>
