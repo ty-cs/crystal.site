@@ -21,7 +21,6 @@ export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
 
       <main>
         <h1 className="title">Welcome to Crystal!</h1>
-
         <h2>
           Your IP: <span className="ip-addr">{ip}</span>
         </h2>

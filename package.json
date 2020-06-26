@@ -1,6 +1,6 @@
 {
-  "name": "with-typescript-eslint-jest",
-  "author": "@erikdstock",
+  "name": "crystal.site",
+  "author": "indefinitus",
   "license": "MIT",
   "version": "1.0.0",
   "scripts": {
@@ -9,9 +9,7 @@
     "start": "next start",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write **/*.{js,ts,tsx}",
-    "lint": "eslint . --ext ts --ext tsx --ext js",
-    "test": "jest",
-    "test-all": "yarn lint && yarn type-check && yarn test"
+    "lint": "eslint . --ext ts --ext tsx --ext js"
   },
   "husky": {
     "hooks": {
@@ -26,26 +24,20 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "next": "latest",
+    "next": "^9.4.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "@testing-library/react": "^10.4.3",
-    "@types/jest": "^26.0.3",
     "@types/node": "^14.0.14",
     "@types/react": "^16.9.41",
-    "@types/testing-library__react": "^10.2.0",
     "@typescript-eslint/eslint-plugin": "^3.4.0",
     "@typescript-eslint/parser": "^3.4.0",
-    "babel-jest": "^26.1.0",
     "eslint": "^7.3.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.0",
     "husky": "^4.2.5",
-    "jest": "^26.1.0",
-    "jest-watch-typeahead": "^0.6.0",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
     "typescript": "^3.9.5"

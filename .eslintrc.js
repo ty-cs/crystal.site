@@ -11,8 +11,7 @@ module.exports = {
   env: {
     es6: true,
     browser: true,
-    jest: true,
-    node: true,
+    node:true,
   },
   rules: {
     'prettier/prettier': 'warn',
