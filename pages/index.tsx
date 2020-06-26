@@ -6,7 +6,7 @@ export const Home = (): JSX.Element => {
   const fetchIP = async () => {
     const { data: res } = await axios.get('/api/hello');
     const { ip, success }: { ip: string; success: number } = res;
-    if (success) setIP(ip);
+    if (success !== -1) setIP(ip);
     console.log('👨🏻‍💻%c|lty test|', 'background-color:#009688;color:#fff;font-weight:700', 'res', ip);
   };
 
