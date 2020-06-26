@@ -15,14 +15,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn run type-check"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "*.@(ts|tsx)": [
-      "yarn lint",
-      "yarn format"
+    "*.{ts|tsx}": [
+      "eslint . --ext ts --ext tsx --ext js --fix",
+      "prettier --write **/*.{js,ts,tsx}"
     ]
   },
   "dependencies": {
