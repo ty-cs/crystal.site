@@ -1,10 +1,18 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
-  res.statusCode = 200
-  res.json({ name: 'John Doe' })
-}
+  try {
+    console.log(
+      '👨🏻‍💻%c|lty test|',
+      'background-color:#009688;color:#fff;font-weight:700',
+      req.headers,
+    );
+    res.status(200).json({ success: 0, ip: req.headers['x-forwarded-for'] });
+  } catch (e) {
+    res.status(500).json({ ip: '', success: -1 });
+  }
+};
 
-export default handler
+export default handler;
