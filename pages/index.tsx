@@ -1,13 +1,15 @@
 import Head from 'next/head';
-import { useEffect } from 'react';
-
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 export const Home = (): JSX.Element => {
+  const [ip, setIP] = useState<string>('');
   const fetchIP = async () => {
-    const res = await fetch('/api/hello');
-    const ip = await res.text();
-
+    const { data: res } = await axios.get('/api/hello');
+    const { ip, success }: { ip: string; success: number } = res;
+    if (success) setIP(ip);
     console.log('👨🏻‍💻%c|lty test|', 'background-color:#009688;color:#fff;font-weight:700', 'res', ip);
   };
+
   useEffect(() => {
     fetchIP();
   }, []);
@@ -27,13 +29,7 @@ export const Home = (): JSX.Element => {
           Get started by editing <code>pages/index.tsx</code>
         </p>
 
-        <button
-          onClick={() => {
-            window.alert('With typescript and Jest');
-          }}
-        >
-          Test Button
-        </button>
+        <h2>Your IP: {ip}</h2>
 
         <div className="grid">
           <a href="https://nextjs.org/docs" className="card">
