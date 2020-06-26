@@ -9,12 +9,7 @@ interface HomeProps {
 }
 export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
   useEffect(() => {
-    console.log(
-      '👨🏻‍💻%c|lty test|',
-      'background-color:#009688;color:#fff;font-weight:700',
-      'extra',
-      extraInfo,
-    );
+    console.log('extra', extraInfo);
   });
   return (
     <div className="container">
