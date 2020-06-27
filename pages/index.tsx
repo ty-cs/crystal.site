@@ -11,6 +11,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { IncomingMessage } from 'http';
+import isEmpty from 'lodash/isEmpty';
+
 interface HomeProps {
   ip: string;
   extraInfo: string;
@@ -55,7 +57,6 @@ const useStyles = makeStyles((theme: Theme) =>
         textDecoration: 'none',
       },
     },
-
     title: {
       margin: 0,
       lineHeight: 1.15,
@@ -80,6 +81,37 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
   const classes = useStyles();
 
+  const renderTable = () => {
+    if (isEmpty(extraInfo)) return null;
+    return (
+      <TableContainer
+        style={{ boxShadow: '0 20px 70px rgba(0, 0, 0, 0.17)' }}
+        component={Paper}
+        className={classes.table}
+      >
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Key</TableCell>
+              <TableCell align="right">Value</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {Object.entries(extraInfo)
+              .filter(([k, _]) => k !== 'readme')
+              .map(([k, v], idx) => (
+                <TableRow key={k}>
+                  <TableCell component="th" scope="row">
+                    {k}
+                  </TableCell>
+                  <TableCell align="right">{'' + v}</TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
+  };
   return (
     <div className={classes.container}>
       <Head>
@@ -87,43 +119,12 @@ export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="network utilities for developers" />
       </Head>
-
       <main>
         <h1 className={classes.title}>Welcome to Crystal.</h1>
         <h2 className={classes.subtitle}>
           Your IP: <span className="ip-addr">{ip}</span>
         </h2>
-        {extraInfo ? (
-          <TableContainer
-            style={{ boxShadow: '0 20px 70px rgba(0, 0, 0, 0.17)' }}
-            component={Paper}
-            // square
-            // elevation={15}
-            // variant="outlined"
-            className={classes.table}
-          >
-            <Table aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Key</TableCell>
-                  <TableCell align="right">Value</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {Object.entries(extraInfo)
-                  .filter(([k, _]) => k !== 'readme')
-                  .map(([k, v], idx) => (
-                    <TableRow key={k}>
-                      <TableCell component="th" scope="row">
-                        {k}
-                      </TableCell>
-                      <TableCell align="right">{'' + v}</TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        ) : null}
+        {renderTable()}
       </main>
 
       <footer>
@@ -141,7 +142,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { req }: { req: IncomingMessage } = context;
   const ip = req.headers['x-forwarded-for'];
 
-  if (!ip) return { props: {} };
+  if (!ip) return { props: { ip: 'failed to load :(', extraInfo: {} } };
 
   const res = await axios.get(`https://ipinfo.io/${ip}/json`);
   const extra = res.data || {};
