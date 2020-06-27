@@ -150,9 +150,7 @@ export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
       </Head>
       <main>
         <h1 className={classes.title}>Welcome to Crystal.</h1>
-        <h2 className={classes.subtitle}>
-          Your IP: <span className="ip-addr">{ip}</span>
-        </h2>
+        <h2 className={classes.subtitle}>Your IP: {ip}</h2>
         {renderTable()}
       </main>
 
