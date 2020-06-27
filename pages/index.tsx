@@ -67,6 +67,13 @@ const useStyles = makeStyles((theme: Theme) =>
     logo: {
       height: '1em',
     },
+    table: {
+      '& tbody tr:last-child': {
+        '& th,td': {
+          borderBottom: 'none',
+        },
+      },
+    },
   }),
 );
 
@@ -93,6 +100,7 @@ export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
             // square
             // elevation={15}
             // variant="outlined"
+            className={classes.table}
           >
             <Table aria-label="simple table">
               <TableHead>
