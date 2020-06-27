@@ -12,7 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { IncomingMessage } from 'http';
 import isEmpty from 'lodash/isEmpty';
-
+import CallMadeRoundedIcon from '@material-ui/icons/CallMadeRounded';
 interface HomeProps {
   ip: string;
   extraInfo: string;
@@ -75,12 +75,21 @@ const useStyles = makeStyles((theme: Theme) =>
         },
       },
     },
+    locLink: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+    },
+
+    icon: {
+      width: 20,
+      height: 20,
+    },
   }),
 );
 
 export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
   const classes = useStyles();
-
   const renderTable = () => {
     if (isEmpty(extraInfo)) return null;
     return (
@@ -99,14 +108,30 @@ export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
           <TableBody>
             {Object.entries(extraInfo)
               .filter(([k, _]) => k !== 'readme')
-              .map(([k, v], idx) => (
-                <TableRow key={k}>
-                  <TableCell component="th" scope="row">
-                    {k}
-                  </TableCell>
-                  <TableCell align="right">{'' + v}</TableCell>
-                </TableRow>
-              ))}
+              .map(([k, v], idx) => {
+                return (
+                  <TableRow key={k}>
+                    <TableCell component="th" scope="row">
+                      {k}
+                    </TableCell>
+                    <TableCell align="right">
+                      {k === 'loc' ? (
+                        <a
+                          href={`https://duckduckgo.com/?q=${encodeURIComponent(v)}&iaxm=maps`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={classes.locLink}
+                        >
+                          {v + ''}
+                          <CallMadeRoundedIcon className={classes.icon} />
+                        </a>
+                      ) : (
+                        v + ''
+                      )}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>
