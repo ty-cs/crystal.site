@@ -13,6 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import { IncomingMessage } from 'http';
 import isEmpty from 'lodash/isEmpty';
 import CallMadeRoundedIcon from '@material-ui/icons/CallMadeRounded';
+import { countryCodeEmoji } from '@/src/utils/flags';
 interface HomeProps {
   ip: string;
   extraInfo: string;
@@ -92,6 +93,7 @@ export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
   const classes = useStyles();
   const renderTable = () => {
     if (isEmpty(extraInfo)) return null;
+
     return (
       <TableContainer
         style={{ boxShadow: '0 20px 70px rgba(0, 0, 0, 0.17)' }}
@@ -125,6 +127,8 @@ export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
                           {v + ''}
                           <CallMadeRoundedIcon className={classes.icon} />
                         </a>
+                      ) : k === 'country' ? (
+                        countryCodeEmoji(v) + ' ' + v
                       ) : (
                         v + ''
                       )}
