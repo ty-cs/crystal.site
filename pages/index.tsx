@@ -72,10 +72,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
-  useEffect(() => {
-    console.log('extra', extraInfo);
-  });
   const classes = useStyles();
+
   return (
     <div className={classes.container}>
       <Head>
@@ -99,14 +97,16 @@ export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {Object.entries(extraInfo).map(([k, v]) => (
-                <TableRow key={k}>
-                  <TableCell component="th" scope="row">
-                    {k}
-                  </TableCell>
-                  <TableCell align="right">{'' + v}</TableCell>
-                </TableRow>
-              ))}
+              {Object.entries(extraInfo)
+                .filter(([k, _]) => k !== 'readme')
+                .map(([k, v]) => (
+                  <TableRow key={k}>
+                    <TableCell component="th" scope="row">
+                      {k}
+                    </TableCell>
+                    <TableCell align="right">{'' + v}</TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>
