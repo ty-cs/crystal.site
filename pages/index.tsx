@@ -67,7 +67,6 @@ const useStyles = makeStyles((theme: Theme) =>
     logo: {
       height: '1em',
     },
-    table: {},
   }),
 );
 
@@ -87,29 +86,36 @@ export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
         <h2 className={classes.subtitle}>
           Your IP: <span className="ip-addr">{ip}</span>
         </h2>
-
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Key</TableCell>
-                <TableCell align="right">Value</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {Object.entries(extraInfo)
-                .filter(([k, _]) => k !== 'readme')
-                .map(([k, v]) => (
-                  <TableRow key={k}>
-                    <TableCell component="th" scope="row">
-                      {k}
-                    </TableCell>
-                    <TableCell align="right">{'' + v}</TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        {extraInfo ? (
+          <TableContainer
+            style={{ boxShadow: '0 20px 70px rgba(0, 0, 0, 0.17)' }}
+            component={Paper}
+            // square
+            // elevation={15}
+            // variant="outlined"
+          >
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Key</TableCell>
+                  <TableCell align="right">Value</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Object.entries(extraInfo)
+                  .filter(([k, _]) => k !== 'readme')
+                  .map(([k, v], idx) => (
+                    <TableRow key={k}>
+                      <TableCell component="th" scope="row">
+                        {k}
+                      </TableCell>
+                      <TableCell align="right">{'' + v}</TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        ) : null}
       </main>
 
       <footer>
