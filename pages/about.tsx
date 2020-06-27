@@ -9,7 +9,7 @@ import Link from '@/src/components/Link';
 const About: React.FC = () => {
   const renderBtn = () => (
     // @ts-ignore
-    <Button variant="contained" color="primary" component={Link} naked href="/test">
+    <Button variant="contained" color="primary" component={Link} naked href="/">
       Go to the main page
     </Button>
   );
