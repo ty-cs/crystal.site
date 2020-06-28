@@ -1,8 +1,7 @@
-import { createMuiTheme } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
 
-// Create a theme instance.
-const theme = createMuiTheme({
+// Create a theme object.
+const theme = {
   typography: {
     fontFamily: [
       '-apple-system',
@@ -26,10 +25,7 @@ const theme = createMuiTheme({
     error: {
       main: red.A400,
     },
-    background: {
-      default: '#fff',
-    },
   },
-});
+};
 
 export default theme;
