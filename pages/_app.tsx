@@ -1,9 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import theme from '@/src/theme';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import themeObj from '@/src/theme';
 
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;
@@ -15,6 +16,19 @@ export default function MyApp(props: AppProps) {
       jssStyles.parentElement?.removeChild(jssStyles);
     }
   }, []);
+
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        ...themeObj,
+        palette: {
+          type: prefersDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [prefersDarkMode],
+  );
 
   return (
     <React.Fragment>

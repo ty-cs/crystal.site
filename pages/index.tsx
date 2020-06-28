@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -91,6 +91,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
   const classes = useStyles();
+
   const renderTable = () => {
     if (isEmpty(extraInfo)) return null;
 
@@ -110,7 +111,7 @@ export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
           <TableBody>
             {Object.entries(extraInfo)
               .filter(([k, _]) => k !== 'readme')
-              .map(([k, v], idx) => {
+              .map(([k, v]) => {
                 return (
                   <TableRow key={k}>
                     <TableCell component="th" scope="row">
