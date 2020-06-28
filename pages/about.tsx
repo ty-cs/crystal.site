@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Link from '@/src/components/Link';
+import Head from 'next/head';
 
 const About: React.FC = () => {
   const renderBtn = () => (
@@ -15,6 +16,9 @@ const About: React.FC = () => {
   );
   return (
     <Container maxWidth="sm">
+      <Head>
+        <title>About</title>
+      </Head>
       <Box my={4}>
         <Typography variant="h4" component="h1" gutterBottom>
           Link example
@@ -26,8 +30,7 @@ const About: React.FC = () => {
           component="h1"
           gutterBottom
         >
-          Because index page is Server λ, unlike this page is a static page, so cannot jump to each
-          other instantly.
+          Because index calls api for ip info, so it&apos;s not instantly.
         </Typography>
       </Box>
     </Container>
