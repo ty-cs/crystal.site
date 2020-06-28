@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
       '& footer': {
         width: '100%',
         height: '100px',
-        borderTop: '1px solid #eaeaea',
+        borderTop: '1px solid ' + theme.palette.divider,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
