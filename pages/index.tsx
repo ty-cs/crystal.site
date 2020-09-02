@@ -170,7 +170,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { req }: { req: IncomingMessage } = context;
   const ip = req.headers['x-forwarded-for'];
 
-  if (!ip) return { props: { ip: 'failed to load :(', extraInfo: {} } };
+  if (!ip) return { props: { ip: 'Failed to load :(', extraInfo: {} } };
 
   const res = await axios.get(`https://ipinfo.io/${ip}/json`);
   const extra = res.data || {};
