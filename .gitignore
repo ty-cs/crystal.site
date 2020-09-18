@@ -34,3 +34,6 @@ pr-stats.md
 # Vercel
 .vercel
 .now
+
+# Other
+.eslintcache

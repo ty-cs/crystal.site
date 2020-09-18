@@ -1,6 +1,13 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
+  parserOptions: {
+    ecmaVersion: 2021,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
   settings: {
     react: {
       version: 'detect', // Tells eslint-plugin-react to automatically detect the version of React to use
@@ -10,8 +17,9 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
-    'prettier/@typescript-eslint', // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
     'plugin:prettier/recommended',
+    'prettier/@typescript-eslint', // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
+    'prettier/react',
   ],
   env: {
     es6: true,
@@ -33,5 +41,31 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': 0,
     '@typescript-eslint/no-unused-vars': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
+    // TypeScript's `noFallthroughCasesInSwitch` option is more robust (#6906)
+    'default-case': 'off',
+    // 'tsc' already handles this (https://github.com/typescript-eslint/typescript-eslint/issues/291)
+    'no-dupe-class-members': 'off',
+    // 'tsc' already handles this (https://github.com/typescript-eslint/typescript-eslint/issues/477)
+    'no-undef': 'off',
+
+    // Add TypeScript specific rules (and turn off ESLint equivalents)
+    '@typescript-eslint/consistent-type-assertions': 'warn',
+    'no-array-constructor': 'off',
+    '@typescript-eslint/no-array-constructor': 'warn',
+    'no-redeclare': 'off',
+    '@typescript-eslint/no-redeclare': 'warn',
+    'no-use-before-define': 'off',
+    'no-unused-expressions': 'off',
+    '@typescript-eslint/no-unused-expressions': [
+      'error',
+      {
+        allowShortCircuit: true,
+        allowTernary: true,
+        allowTaggedTemplates: true,
+      },
+    ],
+    'no-unused-vars': 'off',
+    'no-useless-constructor': 'off',
+    '@typescript-eslint/no-useless-constructor': 'warn',
   },
 };
