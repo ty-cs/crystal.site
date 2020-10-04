@@ -108,6 +108,10 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+const NoScriptFallbackIcon = () => {
+  return <div style={{ height: 48 }} />;
+};
+
 export const Home: React.FC<HomeProps> = ({
   ip,
   extraInfo,
@@ -176,7 +180,7 @@ export const Home: React.FC<HomeProps> = ({
       </Head>
       <header className={classes.header}>
         <div className={classes.grow} />
-        <NoSsr>
+        <NoSsr fallback={<NoScriptFallbackIcon />}>
           <Tooltip title="Toggle Theme">
             <IconButton onClick={toggleTheme} aria-label="delete">
               {!prefersDarkMode ? <Brightness7RoundedIcon /> : <Brightness4RoundedIcon />}
