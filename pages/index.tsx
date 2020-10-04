@@ -189,11 +189,6 @@ export const Home: React.FC<HomeProps> = ({
 
   return (
     <AppContainer className={classes.container}>
-      <Head>
-        <title>Crystal</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content="network utilities for developers" />
-      </Head>
       <header className={classes.header}>
         <span className={classes.title}>Crystal</span>
         <div className={classes.grow} />
