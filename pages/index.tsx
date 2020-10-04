@@ -80,6 +80,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     logo: {
       height: '1em',
+      filter: theme.palette.type === 'dark' ? 'drop-shadow(0 0 4px white)' : 'unset',
     },
     table: {
       '& tbody tr:last-child': {
