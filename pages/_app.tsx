@@ -21,28 +21,27 @@ export default function MyApp(props: AppProps) {
   const localDarkTheme = darkThemeFromLS();
   const queryDarkTheme = useMediaQuery('(prefers-color-scheme: dark)');
 
-  const [prefersDarkMode, setPrefersDarkMode] = React.useState<boolean>(queryDarkTheme);
+  const [isDarkMode, setPrefersDarkMode] = React.useState(localDarkTheme ?? queryDarkTheme);
+
   useEffect(() => {
-    setPrefersDarkMode(queryDarkTheme);
-  }, [queryDarkTheme]);
+    setPrefersDarkMode(localDarkTheme ?? queryDarkTheme);
+  }, [localDarkTheme, queryDarkTheme]);
 
   const toggleTheme = React.useCallback(() => {
-    const isDark = !prefersDarkMode;
-    setThemeToLS(isDark === true ? 'dark' : 'light');
-    setPrefersDarkMode(isDark);
-  }, [prefersDarkMode]);
-
-  const darkMode = localDarkTheme ?? prefersDarkMode;
+    const newTheme = !isDarkMode;
+    setPrefersDarkMode(newTheme);
+    setThemeToLS(newTheme === true ? 'dark' : 'light');
+  }, [isDarkMode]);
 
   const theme = React.useMemo(
     () =>
       createMuiTheme({
         ...themeObj,
         palette: {
-          type: darkMode ? 'dark' : 'light',
+          type: isDarkMode ? 'dark' : 'light',
         },
       }),
-    [darkMode],
+    [isDarkMode],
   );
 
   return (
@@ -54,7 +53,7 @@ export default function MyApp(props: AppProps) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Component {...pageProps} prefersDarkMode={prefersDarkMode} toggleTheme={toggleTheme} />
+        <Component {...pageProps} prefersDarkMode={isDarkMode} toggleTheme={toggleTheme} />
       </ThemeProvider>
     </>
   );
