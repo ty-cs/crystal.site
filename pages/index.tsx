@@ -77,7 +77,13 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: 600,
     },
     subtitle: {
-      fontSize: '3rem',
+      fontSize: '2.5rem',
+      wordBreak: 'break-word',
+
+      // small: 600px
+      [theme.breakpoints.up('sm')]: {
+        fontSize: '3rem',
+      },
     },
     logo: {
       height: '1em',
@@ -199,7 +205,7 @@ export const Home: React.FC<HomeProps> = ({
         </NoSsr>
       </header>
       <main>
-        <h1 className={classes.subtitle}>{`Your IP: ${ip}`}</h1>
+        <h1 className={classes.subtitle}>Your IP: 111.111.111.111</h1>
         {renderTable()}
       </main>
 
