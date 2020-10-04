@@ -21,15 +21,17 @@ export default function MyApp(props: AppProps) {
   const localDarkTheme = darkThemeFromLS();
   const queryDarkTheme = useMediaQuery('(prefers-color-scheme: dark)');
 
-  const [isDarkMode, setPrefersDarkMode] = React.useState(localDarkTheme ?? queryDarkTheme);
+  const [isDarkMode, setIsDarkMode] = React.useState(localDarkTheme ?? queryDarkTheme);
 
   useEffect(() => {
-    setPrefersDarkMode(localDarkTheme ?? queryDarkTheme);
+    // update the initial state automatically when necessary
+    setIsDarkMode(localDarkTheme ?? queryDarkTheme);
   }, [localDarkTheme, queryDarkTheme]);
 
+  // update later manually
   const toggleTheme = React.useCallback(() => {
     const newTheme = !isDarkMode;
-    setPrefersDarkMode(newTheme);
+    setIsDarkMode(newTheme);
     setThemeToLS(newTheme === true ? 'dark' : 'light');
   }, [isDarkMode]);
 
@@ -53,7 +55,7 @@ export default function MyApp(props: AppProps) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Component {...pageProps} prefersDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+        <Component {...pageProps} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
       </ThemeProvider>
     </>
   );
