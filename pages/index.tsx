@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: 600,
     },
     subtitle: {
-      fontSize: '4rem',
+      fontSize: '3rem',
     },
     logo: {
       height: '1em',
