@@ -14,6 +14,8 @@ module.exports = {
     },
   },
   extends: [
+    'airbnb',
+    'airbnb/hooks',
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
@@ -67,5 +69,10 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-useless-constructor': 'off',
     '@typescript-eslint/no-useless-constructor': 'warn',
+    'import/prefer-default-export': 'warn',
+    'react/jsx-props-no-spreading': 'off',
+    'no-nested-ternary': 'warn',
+    'import/no-unresolved': 'off',
+    'react/jsx-filename-extension': 'off',
   },
 };
