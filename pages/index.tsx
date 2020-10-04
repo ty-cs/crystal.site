@@ -25,7 +25,7 @@ interface HomeProps {
   ip: string;
   extraInfo: string;
   toggleTheme: () => void;
-  prefersDarkMode: boolean;
+  isDarkMode: boolean;
 }
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -116,7 +116,7 @@ const NoScriptFallbackIcon = () => {
 export const Home: React.FC<HomeProps> = ({
   ip,
   extraInfo,
-  prefersDarkMode,
+  isDarkMode,
   toggleTheme,
 }): JSX.Element => {
   const classes = useStyles();
@@ -184,7 +184,7 @@ export const Home: React.FC<HomeProps> = ({
         <NoSsr fallback={<NoScriptFallbackIcon />}>
           <Tooltip title="Toggle Theme">
             <IconButton onClick={toggleTheme} aria-label="delete">
-              {!prefersDarkMode ? <Brightness7RoundedIcon /> : <Brightness4RoundedIcon />}
+              {!isDarkMode ? <Brightness7RoundedIcon /> : <Brightness4RoundedIcon />}
             </IconButton>
           </Tooltip>
         </NoSsr>
