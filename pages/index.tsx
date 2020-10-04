@@ -97,7 +97,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
       },
       transition: theme.transitions.create('min-width'),
-      minWidth: 0,
+      minWidth: 320 - 32, // iPhone SE gen1
       // small: 600px
       [theme.breakpoints.up('sm')]: {
         minWidth: 560,
