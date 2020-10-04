@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'center',
       alignItems: 'center',
       '& main': {
+        // width: '100%',
         paddingBottom: theme.spacing(8),
         flex: '1',
         display: 'flex',
@@ -71,12 +72,12 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     title: {
-      margin: 0,
-      lineHeight: 1.15,
-      fontSize: '4rem',
+      lineHeight: '48px',
+      fontSize: 32,
+      fontWeight: 600,
     },
     subtitle: {
-      fontSize: '1.5rem',
+      fontSize: '4rem',
     },
     logo: {
       height: '1em',
@@ -87,6 +88,12 @@ const useStyles = makeStyles((theme: Theme) =>
         '& th,td': {
           borderBottom: 'none',
         },
+      },
+      transition: theme.transitions.create('min-width'),
+      minWidth: 0,
+      // small: 600px
+      [theme.breakpoints.up('sm')]: {
+        minWidth: 560,
       },
     },
     locLink: {
@@ -102,6 +109,7 @@ const useStyles = makeStyles((theme: Theme) =>
     header: {
       display: 'flex',
       width: '100%',
+      alignItems: 'center',
     },
     grow: {
       flexGrow: 1,
@@ -180,6 +188,7 @@ export const Home: React.FC<HomeProps> = ({
         <meta name="description" content="network utilities for developers" />
       </Head>
       <header className={classes.header}>
+        <span className={classes.title}>Crystal</span>
         <div className={classes.grow} />
         <NoSsr fallback={<NoScriptFallbackIcon />}>
           <Tooltip title="Toggle Theme">
@@ -190,8 +199,7 @@ export const Home: React.FC<HomeProps> = ({
         </NoSsr>
       </header>
       <main>
-        <h1 className={classes.title}>Welcome to Crystal.</h1>
-        <h2 className={classes.subtitle}>{`Your IP: ${ip}`}</h2>
+        <h1 className={classes.subtitle}>{`Your IP: ${ip}`}</h1>
         {renderTable()}
       </main>
 
