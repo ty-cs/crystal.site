@@ -206,7 +206,7 @@ export const Home: React.FC<HomeProps> = ({
         </NoSsr>
       </header>
       <main>
-        <h1 className={classes.subtitle}>Your IP: 111.111.111.111</h1>
+        <h1 className={classes.subtitle}>Your IP: {ip}</h1>
         {renderTable()}
       </main>
 
