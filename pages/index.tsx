@@ -14,22 +14,34 @@ import { IncomingMessage } from 'http';
 import isEmpty from 'lodash/isEmpty';
 import CallMadeRoundedIcon from '@material-ui/icons/CallMadeRounded';
 import { countryCodeEmoji } from '@/src/utils/flags';
+import { IconButton } from '@material-ui/core';
+import Tooltip from '@material-ui/core/Tooltip';
+import Brightness7RoundedIcon from '@material-ui/icons/Brightness7Rounded';
+import Brightness4RoundedIcon from '@material-ui/icons/Brightness4Rounded';
+import AppContainer from '@/src/components/AppContainer';
+import NoSsr from '@material-ui/core/NoSsr';
+
 interface HomeProps {
   ip: string;
   extraInfo: string;
+  toggleTheme: () => void;
+  prefersDarkMode: boolean;
 }
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    '@global': {
+      '#main-content': {
+        outline: 0,
+      },
+    },
     container: {
       minHeight: '100vh',
-      padding: '0 0.5rem',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-
       '& main': {
-        padding: '5rem 0',
+        paddingBottom: theme.spacing(8),
         flex: '1',
         display: 'flex',
         flexDirection: 'column',
@@ -39,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
       '& footer': {
         width: '100%',
         height: '100px',
-        borderTop: '1px solid ' + theme.palette.divider,
+        borderTop: `1px solid ${theme.palette.divider}`,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -86,10 +98,22 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 20,
       height: 20,
     },
+    header: {
+      display: 'flex',
+      width: '100%',
+    },
+    grow: {
+      flexGrow: 1,
+    },
   }),
 );
 
-export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
+export const Home: React.FC<HomeProps> = ({
+  ip,
+  extraInfo,
+  prefersDarkMode,
+  toggleTheme,
+}): JSX.Element => {
   const classes = useStyles();
 
   const renderTable = () => {
@@ -125,13 +149,13 @@ export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
                           rel="noopener noreferrer"
                           className={classes.locLink}
                         >
-                          {v + ''}
+                          {`${v}`}
                           <CallMadeRoundedIcon className={classes.icon} />
                         </a>
                       ) : k === 'country' ? (
-                        countryCodeEmoji(v) + ' ' + v
+                        `${countryCodeEmoji(v)} ${v}`
                       ) : (
-                        v + ''
+                        `${v}`
                       )}
                     </TableCell>
                   </TableRow>
@@ -142,13 +166,24 @@ export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
       </TableContainer>
     );
   };
+
   return (
-    <div className={classes.container}>
+    <AppContainer className={classes.container}>
       <Head>
         <title>Crystal</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="network utilities for developers" />
       </Head>
+      <header className={classes.header}>
+        <div className={classes.grow} />
+        <NoSsr>
+          <Tooltip title="Toggle Theme">
+            <IconButton onClick={toggleTheme} aria-label="delete">
+              {!prefersDarkMode ? <Brightness7RoundedIcon /> : <Brightness4RoundedIcon />}
+            </IconButton>
+          </Tooltip>
+        </NoSsr>
+      </header>
       <main>
         <h1 className={classes.title}>Welcome to Crystal.</h1>
         <h2 className={classes.subtitle}>{`Your IP: ${ip}`}</h2>
@@ -160,7 +195,7 @@ export const Home: React.FC<HomeProps> = ({ ip, extraInfo }): JSX.Element => {
           Powered by <img src="/vercel.svg" alt="Vercel Logo" className={classes.logo} />
         </a>
       </footer>
-    </div>
+    </AppContainer>
   );
 };
 
