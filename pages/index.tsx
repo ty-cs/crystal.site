@@ -79,6 +79,7 @@ const useStyles = makeStyles((theme: Theme) =>
     subtitle: {
       fontSize: '2.5rem',
       wordBreak: 'break-word',
+      transition: theme.transitions.create('font-size'),
 
       // small: 600px
       [theme.breakpoints.up('sm')]: {
