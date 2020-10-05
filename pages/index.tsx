@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import React from 'react';
@@ -73,7 +72,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       lineHeight: '48px',
-      fontSize: 32,
+      fontSize: '1.25rem',
       fontWeight: 600,
     },
     subtitle: {
@@ -189,6 +188,7 @@ export const Home: React.FC<HomeProps> = ({
 
   return (
     <AppContainer className={classes.container}>
+      {/* todo: AppBar */}
       <header className={classes.header}>
         <span className={classes.title}>Crystal</span>
         <div className={classes.grow} />
