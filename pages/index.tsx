@@ -15,8 +15,8 @@ import CallMadeRoundedIcon from '@material-ui/icons/CallMadeRounded';
 import { countryCodeEmoji } from '@/src/utils/flags';
 import { IconButton } from '@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
-import Brightness7RoundedIcon from '@material-ui/icons/Brightness7Rounded';
-import Brightness4RoundedIcon from '@material-ui/icons/Brightness4Rounded';
+import DayIcon from '@material-ui/icons/WbSunnyRounded';
+import NightsStayIcon from '@material-ui/icons/NightsStayRounded';
 import AppContainer from '@/src/components/AppContainer';
 import NoSsr from '@material-ui/core/NoSsr';
 
@@ -195,7 +195,7 @@ export const Home: React.FC<HomeProps> = ({
         <NoSsr fallback={<NoScriptFallbackIcon />}>
           <Tooltip title="Toggle Theme">
             <IconButton onClick={toggleTheme} aria-label="delete">
-              {!isDarkMode ? <Brightness7RoundedIcon /> : <Brightness4RoundedIcon />}
+              {!isDarkMode ? <DayIcon /> : <NightsStayIcon />}
             </IconButton>
           </Tooltip>
         </NoSsr>
