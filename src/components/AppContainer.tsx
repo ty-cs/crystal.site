@@ -1,19 +1,26 @@
-import * as React from 'react';
+import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    paddingTop: 16,
-    [theme.breakpoints.up('lg')]: {
-      paddingLeft: theme.spacing(6),
-      paddingRight: theme.spacing(6),
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    root: {
+      paddingTop: 16,
+      [theme.breakpoints.up('lg')]: {
+        paddingLeft: theme.spacing(6),
+        paddingRight: theme.spacing(6),
+      },
     },
-  },
-}));
+  }),
+);
 
-export default function AppContainer(props) {
+interface AppContainerProps {
+  className: string;
+  children: NonNullable<React.ReactNode>;
+}
+
+const AppContainer: React.FC<AppContainerProps> = (props) => {
   const { className, ...other } = props;
   const classes = useStyles();
 
@@ -27,4 +34,6 @@ export default function AppContainer(props) {
       {...other}
     />
   );
-}
+};
+
+export default AppContainer;
