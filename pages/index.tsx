@@ -26,11 +26,15 @@ interface HomeProps {
   toggleTheme: () => void;
   isDarkMode: boolean;
 }
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     '@global': {
       '#main-content': {
         outline: 0,
+      },
+      body: {
+        transition: theme.transitions.create('background-color'),
       },
     },
     container: {
@@ -95,19 +99,22 @@ const useStyles = makeStyles((theme: Theme) =>
           borderBottom: 'none',
         },
       },
-      transition: theme.transitions.create('min-width'),
+      transition: theme.transitions.create(['min-width', 'background-color']),
       minWidth: 320 - 32, // iPhone SE gen1
       // small: 600px
       [theme.breakpoints.up('sm')]: {
         minWidth: 560,
       },
+      boxShadow: '0 20px 70px rgba(0, 0, 0, 0.17)',
+    },
+    row: {
+      transition: theme.transitions.create(['color']),
     },
     locLink: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
     },
-
     icon: {
       width: 20,
       height: 20,
@@ -139,14 +146,10 @@ export const Home: React.FC<HomeProps> = ({
     if (isEmpty(extraInfo)) return null;
 
     return (
-      <TableContainer
-        style={{ boxShadow: '0 20px 70px rgba(0, 0, 0, 0.17)' }}
-        component={Paper}
-        className={classes.table}
-      >
+      <TableContainer component={Paper} className={classes.table}>
         <Table aria-label="simple table">
           <TableHead>
-            <TableRow>
+            <TableRow className={classes.row}>
               <TableCell>Key</TableCell>
               <TableCell align="right">Value</TableCell>
             </TableRow>
