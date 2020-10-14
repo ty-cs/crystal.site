@@ -22,10 +22,12 @@ import NoSsr from '@material-ui/core/NoSsr';
 
 interface HomeProps {
   ip: string;
-  extraInfo: string;
+  extraInfo: IExtraInfo;
   toggleTheme: () => void;
   isDarkMode: boolean;
 }
+
+type IExtraInfo = Record<string, unknown>;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -107,8 +109,8 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       boxShadow: '0 20px 70px rgba(0, 0, 0, 0.17)',
     },
-    row: {
-      transition: theme.transitions.create(['color']),
+    tableCell: {
+      transition: theme.transitions.create(['border-color']),
     },
     locLink: {
       display: 'flex',
@@ -134,6 +136,58 @@ const NoScriptFallbackIcon = () => {
   return <div style={{ height: 48 }} />;
 };
 
+const ExtraInfoTable: React.FC<{ extraInfo: IExtraInfo }> = ({ extraInfo }) => {
+  const classes = useStyles();
+
+  if (isEmpty(extraInfo)) return null;
+
+  return (
+    <TableContainer component={Paper} className={classes.table}>
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell className={classes.tableCell}>Key</TableCell>
+            <TableCell className={classes.tableCell} align="right">
+              Value
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {Object.entries(extraInfo)
+            .filter(([k, _]) => k !== 'readme')
+            .map(([k, v]) => {
+              return (
+                <TableRow key={k}>
+                  <TableCell className={classes.tableCell} component="th" scope="row">
+                    {k}
+                  </TableCell>
+                  <TableCell className={classes.tableCell} align="right">
+                    {k === 'loc' ? (
+                      <a
+                        href={`https://duckduckgo.com/?q=${encodeURIComponent(
+                          v as string,
+                        )}&iaxm=maps`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={classes.locLink}
+                      >
+                        {`${v}`}
+                        <CallMadeRoundedIcon className={classes.icon} />
+                      </a>
+                    ) : k === 'country' ? (
+                      `${countryCodeEmoji(v as string)} ${v}`
+                    ) : (
+                      `${v}`
+                    )}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+};
 export const Home: React.FC<HomeProps> = ({
   ip,
   extraInfo,
@@ -141,53 +195,6 @@ export const Home: React.FC<HomeProps> = ({
   toggleTheme,
 }): JSX.Element => {
   const classes = useStyles();
-
-  const renderTable = () => {
-    if (isEmpty(extraInfo)) return null;
-
-    return (
-      <TableContainer component={Paper} className={classes.table}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow className={classes.row}>
-              <TableCell>Key</TableCell>
-              <TableCell align="right">Value</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {Object.entries(extraInfo)
-              .filter(([k, _]) => k !== 'readme')
-              .map(([k, v]) => {
-                return (
-                  <TableRow key={k}>
-                    <TableCell component="th" scope="row">
-                      {k}
-                    </TableCell>
-                    <TableCell align="right">
-                      {k === 'loc' ? (
-                        <a
-                          href={`https://duckduckgo.com/?q=${encodeURIComponent(v)}&iaxm=maps`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={classes.locLink}
-                        >
-                          {`${v}`}
-                          <CallMadeRoundedIcon className={classes.icon} />
-                        </a>
-                      ) : k === 'country' ? (
-                        `${countryCodeEmoji(v)} ${v}`
-                      ) : (
-                        `${v}`
-                      )}
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
-  };
 
   return (
     <AppContainer className={classes.container}>
@@ -205,7 +212,7 @@ export const Home: React.FC<HomeProps> = ({
       </header>
       <main>
         <h1 className={classes.subtitle}>Your IP: {ip}</h1>
-        {renderTable()}
+        <ExtraInfoTable extraInfo={extraInfo} />
       </main>
 
       <footer>
@@ -225,7 +232,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (!ip) return { props: { ip: 'Failed to load :(', extraInfo: {} } };
 
-  const res = await axios.get(`https://ipinfo.io/${ip}/json`);
+  const res = await axios.get<IExtraInfo>(`https://ipinfo.io/${ip}/json`);
   const extra = res.data || {};
 
   return {

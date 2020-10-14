@@ -32,7 +32,7 @@ export default function MyApp(props: AppProps) {
   const toggleTheme = React.useCallback(() => {
     const newTheme = !isDarkMode;
     setIsDarkMode(newTheme);
-    setThemeToLS(newTheme === true ? 'dark' : 'light');
+    setThemeToLS(newTheme ? 'dark' : 'light');
   }, [isDarkMode]);
 
   const theme = React.useMemo(
@@ -41,6 +41,10 @@ export default function MyApp(props: AppProps) {
         ...themeObj,
         palette: {
           type: isDarkMode ? 'dark' : 'light',
+          // background: {
+          //   default: isDarkMode ? '#000' : '#fff',
+          //   paper: isDarkMode ? '#000' : '#fff',
+          // },
         },
       }),
     [isDarkMode],
