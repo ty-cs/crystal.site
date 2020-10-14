@@ -4,6 +4,7 @@ import { red } from '@material-ui/core/colors';
 const theme = {
   typography: {
     fontFamily: [
+      'ui-rounded',
       'SF Pro Rounded',
       '-apple-system',
       'BlinkMacSystemFont',
