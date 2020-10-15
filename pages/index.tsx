@@ -11,7 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { IncomingMessage } from 'http';
 import isEmpty from 'lodash/isEmpty';
-import CallMadeRoundedIcon from '@material-ui/icons/CallMadeRounded';
+import ArrowForwardIosRoundedIcon from '@material-ui/icons/ArrowForwardIosRounded';
 import { countryCodeEmoji } from '@/src/utils/flags';
 import { IconButton } from '@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -117,10 +117,6 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       justifyContent: 'flex-end',
     },
-    icon: {
-      width: 20,
-      height: 20,
-    },
     header: {
       display: 'flex',
       width: '100%',
@@ -128,6 +124,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     grow: {
       flexGrow: 1,
+    },
+    arrowRight: {
+      width: 16,
+      height: 16,
+
+      marginLeft: 4,
+      color: theme.palette.type === 'light' ? 'rgb(174,174,178)' : 'rgb(99,99,102)',
+      transition: theme.transitions.create('color'),
     },
   }),
 );
@@ -172,7 +176,7 @@ const ExtraInfoTable: React.FC<{ extraInfo: IExtraInfo }> = ({ extraInfo }) => {
                         className={classes.locLink}
                       >
                         {`${v}`}
-                        <CallMadeRoundedIcon className={classes.icon} />
+                        <ArrowForwardIosRoundedIcon className={classes.arrowRight} />
                       </a>
                     ) : k === 'country' ? (
                       `${countryCodeEmoji(v as string)} ${v}`
