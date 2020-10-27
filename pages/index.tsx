@@ -19,6 +19,7 @@ import DayIcon from '@material-ui/icons/WbSunnyRounded';
 import NightsStayIcon from '@material-ui/icons/NightsStayRounded';
 import AppContainer from '@/src/components/AppContainer';
 import NoSsr from '@material-ui/core/NoSsr';
+import Image from 'next/image';
 
 interface HomeProps {
   ip: string;
@@ -221,7 +222,7 @@ export const Home: React.FC<HomeProps> = ({
 
       <footer>
         <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">
-          Powered by <img src="/vercel.svg" alt="Vercel Logo" className={classes.logo} />
+          Powered by <Image unsized src="/vercel.svg" alt="Vercel Logo" className={classes.logo} />
         </a>
       </footer>
     </AppContainer>
