@@ -6,6 +6,17 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Link from '@/src/components/Link';
 import Head from 'next/head';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    '@global': {
+      body: {
+        transition: theme.transitions.create('background-color'),
+      },
+    },
+  }),
+);
 
 const About: React.FC = () => {
   const renderBtn = () => (
@@ -14,6 +25,9 @@ const About: React.FC = () => {
       Go to the main page
     </Button>
   );
+
+  const classes = useStyles();
+
   return (
     <Container maxWidth="sm">
       <Head>
