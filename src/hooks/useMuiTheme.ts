@@ -1,10 +1,37 @@
 import React, { useEffect } from 'react';
-import { darkThemeFromLS, setThemeToLS } from '@/src/utils';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { createMuiTheme } from '@material-ui/core/styles';
-import themeObj from '@/src/theme';
+import { createMuiTheme, Theme } from '@material-ui/core/styles';
 
-const useMuiTheme = () => {
+type LocalTheme = 'dark' | 'light' | 'auto';
+
+const isBrowser = () => typeof window !== 'undefined';
+const THEME_KEY = `__theme`;
+
+export const darkThemeFromLS = (): boolean | null => {
+  try {
+    if (!isBrowser()) {
+      return null;
+    }
+    const res = window.localStorage.getItem(THEME_KEY);
+
+    if (res === null) {
+      return null;
+    }
+    return res === 'dark';
+  } catch (e) {
+    console.error('ERROR', e);
+    return null;
+  }
+};
+
+export const setThemeToLS = (theme: LocalTheme) => {
+  if (!isBrowser()) {
+    return;
+  }
+  window && window.localStorage.setItem(THEME_KEY, theme);
+};
+
+const useMuiTheme = (themeObj: Theme) => {
   const localDarkTheme = darkThemeFromLS();
   const queryDarkTheme = useMediaQuery('(prefers-color-scheme: dark)');
 
@@ -34,7 +61,7 @@ const useMuiTheme = () => {
           // },
         },
       }),
-    [isDarkMode],
+    [themeObj],
   );
   return { theme, isDarkMode, toggleTheme };
 };

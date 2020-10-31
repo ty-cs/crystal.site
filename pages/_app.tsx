@@ -3,9 +3,7 @@ import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import themeObj from '@/src/theme';
-import { darkThemeFromLS, setThemeToLS } from '@/src/utils';
 import useMuiTheme from '@/src/hooks/useMuiTheme';
 
 export default function MyApp(props: AppProps) {
@@ -19,7 +17,7 @@ export default function MyApp(props: AppProps) {
     }
   }, []);
 
-  const { theme, isDarkMode, toggleTheme } = useMuiTheme();
+  const { theme, isDarkMode, toggleTheme } = useMuiTheme(themeObj);
 
   return (
     <>

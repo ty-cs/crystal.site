@@ -12,7 +12,6 @@ import Paper from '@material-ui/core/Paper';
 import { IncomingMessage } from 'http';
 import isEmpty from 'lodash/isEmpty';
 import ArrowForwardIosRoundedIcon from '@material-ui/icons/ArrowForwardIosRounded';
-import { countryCodeEmoji } from '@/src/utils/flags';
 import { IconButton } from '@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
 import DayIcon from '@material-ui/icons/WbSunnyRounded';
@@ -20,6 +19,7 @@ import NightsStayIcon from '@material-ui/icons/NightsStayRounded';
 import AppContainer from '@/src/components/AppContainer';
 import NoSsr from '@material-ui/core/NoSsr';
 import Image from 'next/image';
+import { countryCodeEmoji } from '@/src/utils';
 
 interface HomeProps {
   ip: string;

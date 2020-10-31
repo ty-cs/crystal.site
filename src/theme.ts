@@ -1,7 +1,8 @@
 import { red } from '@material-ui/core/colors';
+import { createMuiTheme } from '@material-ui/core';
 
 // Create a theme object.
-const theme = {
+const theme = createMuiTheme({
   typography: {
     fontFamily: [
       'ui-rounded',
@@ -28,6 +29,6 @@ const theme = {
       main: red.A400,
     },
   },
-};
+});
 
 export default theme;
