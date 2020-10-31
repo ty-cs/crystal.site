@@ -12,7 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import { IncomingMessage } from 'http';
 import isEmpty from 'lodash/isEmpty';
 import ArrowForwardIosRoundedIcon from '@material-ui/icons/ArrowForwardIosRounded';
-import { IconButton } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import DayIcon from '@material-ui/icons/WbSunnyRounded';
 import NightsStayIcon from '@material-ui/icons/NightsStayRounded';
