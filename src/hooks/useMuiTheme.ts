@@ -61,7 +61,7 @@ const useMuiTheme = (themeObj: Theme) => {
           // },
         },
       }),
-    [themeObj],
+    [isDarkMode, themeObj],
   );
   return { theme, isDarkMode, toggleTheme };
 };

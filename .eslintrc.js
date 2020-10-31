@@ -30,6 +30,7 @@ module.exports = {
     node: true,
   },
   rules: {
+    'react-hooks/exhaustive-deps': 2,
     'prettier/prettier': 'warn',
     'no-console': 'off',
     'react/react-in-jsx-scope': 0,
