@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import themeObj from '@/src/theme';
 import { darkThemeFromLS, setThemeToLS } from '@/src/utils';
+import useMuiTheme from '@/src/hooks/useMuiTheme';
 
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;
@@ -18,37 +19,7 @@ export default function MyApp(props: AppProps) {
     }
   }, []);
 
-  const localDarkTheme = darkThemeFromLS();
-  const queryDarkTheme = useMediaQuery('(prefers-color-scheme: dark)');
-
-  const [isDarkMode, setIsDarkMode] = React.useState(localDarkTheme ?? queryDarkTheme);
-
-  useEffect(() => {
-    // update the initial state automatically when necessary
-    setIsDarkMode(localDarkTheme ?? queryDarkTheme);
-  }, [localDarkTheme, queryDarkTheme]);
-
-  // update later manually
-  const toggleTheme = React.useCallback(() => {
-    const newTheme = !isDarkMode;
-    setIsDarkMode(newTheme);
-    setThemeToLS(newTheme ? 'dark' : 'light');
-  }, [isDarkMode]);
-
-  const theme = React.useMemo(
-    () =>
-      createMuiTheme({
-        ...themeObj,
-        palette: {
-          type: isDarkMode ? 'dark' : 'light',
-          // background: {
-          //   default: isDarkMode ? '#000' : '#fff',
-          //   paper: isDarkMode ? '#000' : '#fff',
-          // },
-        },
-      }),
-    [isDarkMode],
-  );
+  const { theme, isDarkMode, toggleTheme } = useMuiTheme();
 
   return (
     <>
