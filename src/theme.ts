@@ -1,5 +1,5 @@
 import { red } from '@material-ui/core/colors';
-import { createMuiTheme, ThemeOptions } from '@material-ui/core';
+import { ThemeOptions } from '@material-ui/core';
 
 // Create a theme object.
 const theme: ThemeOptions = {
