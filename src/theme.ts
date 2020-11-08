@@ -1,8 +1,7 @@
 import { red } from '@material-ui/core/colors';
-import { ThemeOptions } from '@material-ui/core';
 
 // Create a theme object.
-const theme: ThemeOptions = {
+const theme = {
   typography: {
     fontFamily: [
       'ui-rounded',
