@@ -18,7 +18,6 @@ import DayIcon from '@material-ui/icons/WbSunnyRounded';
 import NightsStayIcon from '@material-ui/icons/NightsStayRounded';
 import AppContainer from '@/src/components/AppContainer';
 import NoSsr from '@material-ui/core/NoSsr';
-import Image from 'next/image';
 import { countryCodeEmoji } from '@/src/utils';
 
 interface HomeProps {
@@ -93,7 +92,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     logo: {
-      height: '1em',
+      height: '1rem',
       filter: theme.palette.type === 'dark' ? 'drop-shadow(0 0 4px white)' : 'unset',
     },
     table: {
@@ -222,7 +221,7 @@ export const Home: React.FC<HomeProps> = ({
 
       <footer>
         <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">
-          Powered by <Image unsized src="/vercel.svg" alt="Vercel Logo" className={classes.logo} />
+          Powered by <img src="/vercel.svg" alt="Vercel Logo" className={classes.logo} />
         </a>
       </footer>
     </AppContainer>

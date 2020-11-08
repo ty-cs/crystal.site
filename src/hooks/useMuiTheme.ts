@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { createMuiTheme, Theme } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeOptions } from '@material-ui/core/styles';
 
 type LocalTheme = 'dark' | 'light' | 'auto';
 
@@ -31,7 +31,7 @@ export const setThemeToLS = (theme: LocalTheme) => {
   window && window.localStorage.setItem(THEME_KEY, theme);
 };
 
-const useMuiTheme = (themeObj: Theme) => {
+const useMuiTheme = (themeObj: ThemeOptions) => {
   const localDarkTheme = darkThemeFromLS();
   const queryDarkTheme = useMediaQuery('(prefers-color-scheme: dark)');
 
@@ -54,6 +54,7 @@ const useMuiTheme = (themeObj: Theme) => {
       createMuiTheme({
         ...themeObj,
         palette: {
+          ...themeObj.palette,
           type: isDarkMode ? 'dark' : 'light',
           // background: {
           //   default: isDarkMode ? '#000' : '#fff',
