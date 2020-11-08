@@ -24,7 +24,7 @@ export default function MyApp(props: AppProps) {
       <Head>
         <title>Crystal</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content="network utilities for developers" />
+        <meta name="description" content="Network utilities for developers" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>
