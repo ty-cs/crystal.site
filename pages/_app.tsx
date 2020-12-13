@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
 import themeObj from '@/src/theme';
 import useMuiTheme from '@/src/hooks/useMuiTheme';
+
+export const cache = createCache({ key: 'css', prepend: true });
 
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;
@@ -20,7 +24,7 @@ export default function MyApp(props: AppProps) {
   const { theme, isDarkMode, toggleTheme } = useMuiTheme(themeObj);
 
   return (
-    <>
+    <CacheProvider value={cache}>
       <Head>
         <title>Crystal</title>
         <link rel="icon" href="/favicon.ico" />
@@ -32,6 +36,6 @@ export default function MyApp(props: AppProps) {
         <CssBaseline />
         <Component {...pageProps} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
       </ThemeProvider>
-    </>
+    </CacheProvider>
   );
 }
