@@ -30,6 +30,7 @@ module.exports = {
     node: true,
   },
   rules: {
+    'import/extensions': 0,
     'react-hooks/exhaustive-deps': 2,
     'prettier/prettier': 'warn',
     'no-console': 'off',
