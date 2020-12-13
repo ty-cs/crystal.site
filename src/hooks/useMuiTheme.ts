@@ -55,7 +55,7 @@ const useMuiTheme = (themeObj: ThemeOptions) => {
         ...themeObj,
         palette: {
           ...themeObj.palette,
-          type: isDarkMode ? 'dark' : 'light',
+          mode: isDarkMode ? 'dark' : 'light',
           // background: {
           //   default: isDarkMode ? '#000' : '#fff',
           //   paper: isDarkMode ? '#000' : '#fff',

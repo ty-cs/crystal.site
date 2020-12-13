@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     logo: {
       height: '1rem',
-      filter: theme.palette.type === 'dark' ? 'drop-shadow(0 0 4px white)' : 'unset',
+      filter: theme.palette.mode === 'dark' ? 'drop-shadow(0 0 4px white)' : 'unset',
     },
     table: {
       '& tbody tr:last-child': {
@@ -130,7 +130,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: 16,
 
       marginLeft: 4,
-      color: theme.palette.type === 'light' ? 'rgb(174,174,178)' : 'rgb(99,99,102)',
+      color: theme.palette.mode === 'light' ? 'rgb(174,174,178)' : 'rgb(99,99,102)',
       transition: theme.transitions.create('color'),
     },
   }),
